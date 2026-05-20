@@ -59,7 +59,7 @@ export default function TransactionForm({ accounts }: { accounts: Account[] }) {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) { setError('No autenticado'); setLoading(false); return }
 
-    const amt = parseFloat(amount)
+    const amt = parseFloat(amount.replace(',', '.'))
     if (isNaN(amt) || amt <= 0) { setError('Monto inválido'); setLoading(false); return }
 
     if (type === 'transferencia' && (!toAccountId || toAccountId === accountId)) {
@@ -130,14 +130,12 @@ export default function TransactionForm({ accounts }: { accounts: Account[] }) {
           <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg font-bold"
             style={{ color: 'var(--text-muted)' }}>$</span>
           <input
-            type="number"
-            step="0.01"
-            min="0.01"
+            type="text"
+            inputMode="decimal"
             value={amount}
             onChange={e => setAmount(e.target.value)}
             placeholder="0.00"
             required
-            inputMode="decimal"
             className="w-full pl-9 pr-4 py-4 rounded-xl text-2xl font-bold"
             style={{ background: 'var(--bg-card)', color: 'var(--text-primary)', border: '1px solid var(--border)' }}
           />
@@ -221,14 +219,14 @@ export default function TransactionForm({ accounts }: { accounts: Account[] }) {
         />
       </div>
 
-      {isInterbankTransfer() && amount && parseFloat(amount) > 0 && (
+      {isInterbankTransfer() && amount && parseFloat(amount.replace(',', '.')) > 0 && (
         <div className="rounded-xl px-4 py-3 text-sm flex items-start gap-2"
           style={{ background: '#f59e0b15', color: '#fbbf24', border: '1px solid #f59e0b30' }}>
           <span className="mt-0.5">⚠</span>
           <span>
             Transferencia interbancaria: se descontarán{' '}
-            <strong>${(parseFloat(amount) + INTERBANK_FEE).toFixed(2)}</strong> de la cuenta origen
-            (${parseFloat(amount).toFixed(2)} + $0.41 de comisión).
+            <strong>${(parseFloat(amount.replace(',', '.')) + INTERBANK_FEE).toFixed(2)}</strong> de la cuenta origen
+            (${parseFloat(amount.replace(',', '.')).toFixed(2)} + $0.41 de comisión).
           </span>
         </div>
       )}

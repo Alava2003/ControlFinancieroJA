@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git --yes)",
+      "Read(//c/proyectos/**)",
+      "Bash(npx create-next-app@latest control-financiero-ja --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git --yes)",
+      "Bash(Move-Item \"C:\\\\proyectos\\\\control-financiero-ja\\\\*\" \"C:\\\\proyectos\\\\ControlFinancieroJA\\\\\" -Force 2>&1; Move-Item \"C:\\\\proyectos\\\\control-financiero-ja\\\\.*\" \"C:\\\\proyectos\\\\ControlFinancieroJA\\\\\" -Force)",
+      "Bash(Remove-Item \"C:\\\\proyectos\\\\control-financiero-ja\" -Recurse -Force)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(gh auth *)",
+      "PowerShell(winget install *)",
+      "Bash(vercel *)",
+      "Bash(git push *)"
+    ]
+  }
+}
